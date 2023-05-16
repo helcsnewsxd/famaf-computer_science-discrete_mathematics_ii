@@ -217,8 +217,8 @@ int Gross(){
     vector<int> edgeValues;
     for(int x : setEdgeValues) edgeValues.push_back(x);
 
-    int s = 0, e = n;
-    while(s + 1 < e){
+    int s = -1, e = int(edgeValues.size());
+    while(e - s > 1){
         int m = (s+e)/2;
 
         cout << string(60, '_') << '\n';
@@ -233,15 +233,6 @@ int Gross(){
         }
     }
 
-    cout << string(60, '_') << '\n';
-    cout << "           CONSIDERO CASO CON m = " << s << " Y edgeValues[m] = " << edgeValues[s] << '\n';
-    if(calcMatching(n, edgeValues[s], matrixAdj) == n){
-        cout << "           ES MATCHING PERFECTO\n\n";
-        cout << string(60, '_') << '\n';
-        cout << "           LA RESPUESTA ES " << edgeValues[s] << '\n';
-        return s;
-    }
-    cout << "           NO ES MATCHING PERFECTO\n\n";
     cout << string(60, '_') << '\n';
     cout << "           LA RESPUESTA ES " << edgeValues[e] << '\n';
     return e;
