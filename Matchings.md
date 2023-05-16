@@ -56,3 +56,16 @@ Matching que "cubre" todos los vértices de una de las partes del grafo, es deci
 
 ## Matchings pesados
 
+### Minimizando el mayor costo (Algoritmo de Gross)
+
+- Se considera un grafo $G$ bipartito con pesos en los lados, con ambas partes con la misma cardinalidad (digamos $n$) y al menos un matching perfecto
+- Se quiere encontrar de entre todos los matchings perfectos, uno que minimice el mayor peso
+- El algoritmo es el siguiente:
+  - Se hace búsqueda binaria sobre los costos de los lados en el grafo
+  - Se calcula el matching maximal para el grafo donde se consideran solo las aristas con costo menor o igual a $edgeValue[m]$
+  - Si tiene matching perfecto, hay que tomar un umbral más chico
+    - Puede considerarse la mitad entre el $m$ y la cota inferior, pero una optimización (no mejora complejidad del peor caso) es considerar en vez del umbral actual, el máximo costo considerado en el matching perfecto
+  - Caso contrario, si no lo tiene, hay que tomar uno más alto (el nuevo umbral es la mitad entre el $m$ y la cota superior)
+- La complejidad del algoritmo de Gross es $O(n^{\frac{5}{2}}lg(n))$
+
+### Minimizando la suma de los costos
