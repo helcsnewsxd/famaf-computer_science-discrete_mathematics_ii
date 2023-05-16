@@ -112,7 +112,7 @@ struct Matching{
         }
 
         while(!q.empty()){
-            // print(); // --> SI QUIERO DETALLE POR DETALLE
+            // print(); // --> ALL STEPS
             pair<int, bool> y = q.front(); int x = y.first;
             q.pop();
             if(y.second == 0){ // isRow
