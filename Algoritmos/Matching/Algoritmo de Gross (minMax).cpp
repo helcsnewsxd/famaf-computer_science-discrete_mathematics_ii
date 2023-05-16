@@ -159,7 +159,18 @@ private:
 public:
     Matching(){ readInput(); }
 
-    void calcMaxMatching(){
+    Matching(int N, int M, vector<vector<int> > ADJ){
+        assert(int(ADJ.size()) == N && int(ADJ[0].size()) == M);
+
+        maxMatching = 0;
+        n = N, m = M;
+
+        matrixAdj = ADJ;
+        tag[0].resize(n, -1), tag[1].resize(m, -1);
+        father[0].resize(n, -1), father[1].resize(m, -1);
+    }
+
+    int calcMaxMatching(){
         firstMatching();
         print();
 
@@ -169,13 +180,75 @@ public:
             antMaxMatching = maxMatching;
             stepMaxMatching();
         }while(antMaxMatching != maxMatching);
+
+        return maxMatching;
     }
 };
 
-int main(){
-    Matching *matching = new Matching();
-    matching->calcMaxMatching();
+int calcMatching(int n, int limit, const vector<vector<int> > &matrixAdj){
+    vector<vector<int> > newMatrixAdj(n, vector<int> (n, 0));
+    for(int i = 0; i < n; i++)
+        for(int j = 0; j < n; j++)
+            newMatrixAdj[i][j] = (matrixAdj[i][j] != 0 && matrixAdj[i][j] <= limit);
+    
+    Matching *matching = new Matching(n, n, newMatrixAdj);
+    int ret = matching->calcMaxMatching();
     delete matching;
+    return ret;
+}
+
+int Gross(){
+    // n
+    // 13 0 1 ... 1944
+    //    ...
+    // 485 2 1 ... 1
+    // Every row and column has one or more 1's
+    // n = m
+    // There is a perfect matching
+    
+    int n; cin >> n;
+    vector<vector<int> > matrixAdj(n, vector<int> (n, 0));
+    set<int> setEdgeValues;
+    for(int i = 0; i < n; i++)
+        for(int j = 0; j < n; j++){
+            cin >> matrixAdj[i][j];
+            setEdgeValues.insert(matrixAdj[i][j]);
+        }
+    vector<int> edgeValues;
+    for(int x : setEdgeValues) edgeValues.push_back(x);
+
+    int s = 0, e = n;
+    while(s + 1 < e){
+        int m = (s+e)/2;
+
+        cout << string(60, '_') << '\n';
+        cout << "           CONSIDERO CASO CON m = " << m << " Y edgeValues[m] = " << edgeValues[m] << '\n';
+
+        if(calcMatching(n, edgeValues[m], matrixAdj) == n){ // isPerfectMatching
+            cout << "           ES MATCHING PERFECTO\n\n";
+            e = m;
+        } else{
+            cout << "           NO ES MATCHING PERFECTO\n\n";
+            s = m;
+        }
+    }
+
+    cout << string(60, '_') << '\n';
+    cout << "           CONSIDERO CASO CON m = " << s << " Y edgeValues[m] = " << edgeValues[s] << '\n';
+    if(calcMatching(n, edgeValues[s], matrixAdj) == n){
+        cout << "           ES MATCHING PERFECTO\n\n";
+        cout << string(60, '_') << '\n';
+        cout << "           LA RESPUESTA ES " << edgeValues[s] << '\n';
+        return s;
+    }
+    cout << "           NO ES MATCHING PERFECTO\n\n";
+    cout << string(60, '_') << '\n';
+    cout << "           LA RESPUESTA ES " << edgeValues[e] << '\n';
+    return e;
+}
+
+int main(){
+    Gross();
 
     return 0;
 }
