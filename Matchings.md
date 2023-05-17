@@ -90,7 +90,7 @@ Como consecuencia, estas propiedades sugieren el siguiente procedimiento:
 3. Buscar un matching perfecto de $0s$ (en el grafo, dos vértices tienen aristas solo si $C_{x,y}=0$)
     - Si encontramos uno, este minimiza la suma
     - Caso contrario, se hace lo que se describe en el algoritmo
-      - Si no existe matching, siempre tendremos un $S$ con $|S|\ge|\Gamma(S)|$ y sabemos que $S$ es:
+      - Si no existe matching, siempre tendremos un $S$ con $|S|\gt|\Gamma(S)|$ y sabemos que $S$ es:
         - Intersección del corte con $X$
         - En sistema de matrices, $S$ serán todas las filas etiquetadas cuando paramos
 
@@ -99,7 +99,7 @@ Como consecuencia, estas propiedades sugieren el siguiente procedimiento:
 1. Restar el mínimo de cada fila
 2. Restar el mínimo de cada columna
 3. Buscar matching perfecto de ceros
-4. Si se encuentra, listo. Sino, habrá un $S$ con $|S|\ge |\Gamma(S)|$
+4. Si se encuentra, listo. Sino, habrá un $S$ con $|S|\gt |\Gamma(S)|$
     - Calcular $m=\text{ mínimo de las entradas de la matriz que estén en las filas de} S\text{ y las columnas del complemento de }\Gamma(S)$
     - Restar $m$ de las filas de $S$
     - Sumar $m$ a las columnas de $\Gamma(S)$
