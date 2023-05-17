@@ -27,3 +27,7 @@ Tienen el formato de INPUT de los ejercicios para facilitar la verificación
 ## [Matchings](Matchings.md)
 
 ### Algoritmos de Matchings
+
+- Matching sin pesos: [Matching sin pesos](Algoritmos/Matching/Matching%20sin%20pesos.cpp)
+- Gross (minimizar mayor costo): [Gross](Algoritmos/Matching/Algoritmo%20de%20Gross%20(minMax).cpp)
+- Húngaro (minimizar suma): [Húngaro](Algoritmos/Matching/Hungaro.cpp)
