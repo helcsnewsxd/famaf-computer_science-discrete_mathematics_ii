@@ -28,7 +28,7 @@ Un matching que tenga la mayor cantidad posible de lados se dice _matching maxim
       - $U=\{ y\in Y:out_f(y)=1\}$
       - $F=\{ xy\in E(G):x\in W,y\in U:f(\overrightarrow{xy})=1\}$
 
-      entonces $(W\cup U,F)$ es un subgrafo de $G$ que es el matching maximal, donde su cantidad de lados ( $\#F$ ) es igual al valor del flujo ( $v(f)$ )
+      entonces $(W\cup U,F)$ es un subgrafo de $G$ que es el matching maximal, donde su cantidad de lados ( $Size(F)$ ) es igual al valor del flujo ( $v(f)$ )
     - Vale también la inversa (de matching a flujo), por lo que flujos maximales enteros se corresponden con matchings maximales
 
 ## Perfección y completitud de los matchings
@@ -100,7 +100,7 @@ Como consecuencia, estas propiedades sugieren el siguiente procedimiento:
 2. Restar el mínimo de cada columna
 3. Buscar matching perfecto de ceros
 4. Si se encuentra, listo. Sino, habrá un $S$ con $|S|\ge |\Gamma(S)|$
-    - Calcular $m=\text{ mínimo de las entradas de la matriz que estén en las filas de} $S$\text{ y las columnas del complemento de }\Gamma(S)$
+    - Calcular $m=\text{ mínimo de las entradas de la matriz que estén en las filas de} S\text{ y las columnas del complemento de }\Gamma(S)$
     - Restar $m$ de las filas de $S$
     - Sumar $m$ a las columnas de $\Gamma(S)$
       - Los dos pasos anteriores se reducen a
