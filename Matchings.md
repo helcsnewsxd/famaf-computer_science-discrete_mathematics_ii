@@ -110,3 +110,16 @@ Como consecuencia, estas propiedades sugieren el siguiente procedimiento:
       - Desde las filas $S$ manteniendo todas las etiquetas
     - Se puede cambiar la matriz y aún así no poder extender el matching ni en un lado (esto puede pasar a lo sumo $n$ veces)
       - Luego de un cambio de matriz, _o crece el matching o crece el_ $S$
+
+### Algoritmos que surgen de problemas pedidos en el práctico
+
+#### Minimizar la suma de los costos de entre todos los matchings que minimicen el mayor costo
+
+Se aplica el algoritmo de Gross con la binaria en el array de los costos de los lados. Cuando se obtiene el resultado, se considera la matriz con la que se trabajó en ese umbral (i.e., solo con los lados menores e iguales al umbral) y allí se aplica Húngaro.
+La complejidad es la suma de la complejidad de Gross y de Húngaro.
+
+#### Minimizar el mayor costo de entre todos los matchings que minimicen la suma
+
+Se aplica Húngaro primero y nos guardamos el valor de la menor suma posible a obtener.
+Se aplica el algoritmo de Gross con la binaria en el array de los costos de los lados. En caso que se obtenga un matching perfecto con el umbral seleccionado, no vamos a considerar "que está bien" sino que eso significa que a la matriz se le va a aplicar Húngaro. En caso que el valor de la suma de lo mismo que la mínima obtenida al principio, se considera que está "todo OK" y se recursiona a la mitad inferior. Caso contrario, no es lo que se busca por lo que se recursiona a la mitad superior.
+La complejidad es la complejidad de Gross más la de Húngaro multiplicada por $log_2(N)$ (donde $N$ es la cantidad de umbrales posibles)
