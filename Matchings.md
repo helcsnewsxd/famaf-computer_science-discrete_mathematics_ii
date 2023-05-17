@@ -123,3 +123,8 @@ La complejidad es la suma de la complejidad de Gross y de Húngaro.
 Se aplica Húngaro primero y nos guardamos el valor de la menor suma posible a obtener.
 Se aplica el algoritmo de Gross con la binaria en el array de los costos de los lados. En caso que se obtenga un matching perfecto con el umbral seleccionado, no vamos a considerar "que está bien" sino que eso significa que a la matriz se le va a aplicar Húngaro. En caso que el valor de la suma de lo mismo que la mínima obtenida al principio, se considera que está "todo OK" y se recursiona a la mitad inferior. Caso contrario, no es lo que se busca por lo que se recursiona a la mitad superior.
 La complejidad es la complejidad de Gross más la de Húngaro multiplicada por $log_2(N)$ (donde $N$ es la cantidad de umbrales posibles)
+
+#### Buscar el máximo en los matchings (sea de suma o de costo individual)
+
+- Si lo que se busca es la suma, hay que aplicar Húngaro pero con la matriz de costes invertidos (i.e., multiplicados todos por $-1$)
+- Si lo que se busca es el máximo costo (individual), hay que aplicar Gross y usar el umbral pero en vez de considerar la matriz con las aristas de coste $\le\text{umbral}$, vamos a considerar las de coste $\ge\text{umbral}$. Luego, tenemos una búsqueda binaria de la forma _True, True, True, False, False, ..._, por lo que en vez de quedarnos con la variable $end$, nos vamos a quedar con $start$
