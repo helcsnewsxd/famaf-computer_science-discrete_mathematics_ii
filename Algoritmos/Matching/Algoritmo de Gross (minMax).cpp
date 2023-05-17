@@ -92,25 +92,10 @@ private:
 
     void extendMatching(int x, bool isColumn){
         if(isColumn){
-            for(int i = 0; i < n; i++){
-                if(matrixAdj[i][x] && i != tag[1][x] && father[0][i] == -2){
-                    maxMatching++;
-                    tag[1][x] = i;
-                    extendMatching(i, 0);
-                    tag[0][i] = x;
-                    return;
-                }
-            }
-
-            for(int i = 0; i < n; i++){
-                if(matrixAdj[i][x] && i != tag[1][x] && father[0][i] != -1){
-                    maxMatching++;
-                    tag[1][x] = i;
-                    extendMatching(i, 0);
-                    tag[0][i] = x;
-                    return;
-                }
-            }
+            maxMatching++;
+            tag[1][x] = father[1][x];
+            extendMatching(tag[1][x], 0);
+            tag[0][tag[1][x]] = x;
         }else if(tag[0][x] == -1) return;
         else{
             maxMatching--;
@@ -143,7 +128,9 @@ private:
 
             }else{ // isColumn
                 if(tag[1][x] == -1){ // extend matching
+                    int antMaxMatching = maxMatching;
                     extendMatching(x, 1);
+                    assert(maxMatching == antMaxMatching+1);
                     break;
                 }else if(father[0][tag[1][x]] == -1){
                     father[0][tag[1][x]] = x;
