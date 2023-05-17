@@ -68,4 +68,45 @@ Matching que "cubre" todos los vértices de una de las partes del grafo, es deci
   - Caso contrario, si no lo tiene, hay que tomar uno más alto (el nuevo umbral es la mitad entre el $m$ y la cota superior)
 - La complejidad del algoritmo de Gross es $O(n^{\frac{5}{2}}lg(n))$
 
-### Minimizando la suma de los costos
+### Minimizando la suma de los costos (Húngaro)
+
+El problema que se quiere resolver ahora es el siguiente:
+
+- Dado un grafo bipartito con partes iguales y pesos en los lados que representan costos, queremos hallar un matching perfecto que minimice la suma de estos
+- Dado que un matching perfecto induce una biyección entre las filas y las columnas que representa al grafo, el problema es equivalente a lo siguiente:
+  - Dada una matriz $C$, $n\times n$, encontrar una permutación $\sigma :\left\lbrace 1,2,...,n\right\rbrace\rightarrow\left\lbrace 1,2,...,n\right\rbrace$ tal que $\sum C_{i,\sigma(i)}\leq\sum C_{i,\tau(i)}$ para toda permutación $\tau :\left\lbrace 1,2,...,n\right\rbrace\rightarrow\left\lbrace 1,2,...,n\right\rbrace$
+
+#### Preludio
+
+- Supongamos que $C$ es una matriz de costos $C$ tal que $C_{i,j}\geq 0\forall i,j$. Sea $\sigma$ una permutación de $\left\lbrace 1,2,...,n\right\rbrace$ tal que $C_{i,\sigma(i)}=0\forall i$, entonces el matching asociado a $\sigma$ minimiza la suma de los costos
+- Supongamos que $C$ es una matriz de costos $C$, $n\times n$ y sea $\tilde{C}$ una matriz que se obtiene de $C$ restándole una _constante_ a una fila o columna, entonces todo matching que minimice la suma de costos respecto de $C$ también minimiza la suma de costos respecto de $\tilde{C}$ (y viceversa)
+
+Como consecuencia, estas propiedades sugieren el siguiente procedimiento:
+
+1. Restar el mínimo de cada fila a cada fila (hay al menos un $0$ en cada fila)
+    - Se puede restar un número negativo (i.e., sumar)
+2. Restar el mínimo de cada columna a cada columna (hay al menos un $0$ en cada columna)
+    - Se puede restar un número negativo (i.e., sumar)
+3. Buscar un matching perfecto de $0s$ (en el grafo, dos vértices tienen aristas solo si $C_{x,y}=0$)
+    - Si encontramos uno, este minimiza la suma
+    - Caso contrario, se hace lo que se describe en el algoritmo
+      - Si no existe matching, siempre tendremos un $S$ con $|S|\ge|\Gamma(S)|$ y sabemos que $S$ es:
+        - Intersección del corte con $X$
+        - En sistema de matrices, $S$ serán todas las filas etiquetadas cuando paramos
+
+#### Descripción del algoritmo
+
+1. Restar el mínimo de cada fila
+2. Restar el mínimo de cada columna
+3. Buscar matching perfecto de ceros
+4. Si se encuentra, listo. Sino, habrá un $S$ con $|S|\ge |\Gamma(S)|$
+    - Calcular $m=\text{ mínimo de las entradas de la matriz que estén en las filas de} $S$\text{ y las columnas del complemento de }\Gamma(S)$
+    - Restar $m$ de las filas de $S$
+    - Sumar $m$ a las columnas de $\Gamma(S)$
+      - Los dos pasos anteriores se reducen a
+        - Restar $m$ de $S\times\overline{\Gamma(S)}$
+        - Sumar $m$ a $\overline{S}\times\Gamma(S)$
+    - Continuar buscando el matching perfecto de ceros en la nueva matriz
+      - Desde las filas $S$ manteniendo todas las etiquetas
+    - Se puede cambiar la matriz y aún así no poder extender el matching ni en un lado (esto puede pasar a lo sumo $n$ veces)
+      - Luego de un cambio de matriz, _o crece el matching o crece el_ $S$
