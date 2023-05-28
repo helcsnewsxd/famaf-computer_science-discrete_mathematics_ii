@@ -84,3 +84,62 @@ Sea $C$ un código de longitud $n$, $\delta=\delta(C)$ y $t=\left\lfloor\frac{\d
 - Un código $C$ es _perfecto_ si el $\leq$ de la cota de Hamming es un $=$. Es decir, si $$len(C)=\frac{2^n}{\sum_{i=1}^t \binom{n}{i}}$$
 - Se llaman así porque son lo mejor que puede haber, dadas las limitaciones del universo
   - Hay una cantidad infinita (haciendo variar el $n$) pero son extremadamente raros
+
+## Códigos de Corrección de Errores Lineales
+
+- Un código **lineal** de longitud $n$ es un _subespacio vectorial_ de $\left\lbrace 0,1\right\rbrace^n$
+  - Es decir, un código $C$ es lineal si y solo si es un subconjunto no vacío de $\left\lbrace 0,1\right\rbrace^n$ invariante por la suma (i.e., $u,v\in C\Rightarrow u+v\in C$ )
+  - Se prefieren los códigos lineales a los no lineales, siendo los más usados. Una de las causas es que es más fácil calcular $\delta$ en códigos lineales
+
+### Peso de Hamming
+
+- Dada una palabra $v$ de un código, el **peso de Hamming** de $v$ es $|v|=d_H(v,0)$, es decir, es el número de unos que tiene $v$.
+  - _Observación:_ $d_H(x,y)=|x+y|$
+  - _Lema:_ Si $C$ es lineal, entonces $\delta(C)=\text{Min}\left\lbrace |v|:v\in C,v\neq 0\right\rbrace$
+    - Por ello, en esta clase de códigos, se puede calcular en tiempo _lineal_ en vez de hacerlo de forma _cuadrática_
+
+### Dimensión de un código lineal
+
+- Un código lineal con dimensión $k$, longitud $n$ y $\delta(C)=\delta$ se suele denotar como un código $(n,k,\delta)$
+  - La dimensión de un espacio vectorial es la cardinalidad de cualquiera de sus bases. La propiedad que se tiene que cumplir para ser base es:
+    - Generar $V$: $u\in V\Rightarrow\exists c_1,..,c_k:u=c_1u_1+..+c_ku_k$
+    - Es LI: $c_1u_1+..+c_ku_k=0\Rightarrow c_1=..=c_k=0$
+- _Teorema importante:_ si $k$ es la dimensión de un código y $B$ tiene $k$ elementos, entonces $B$ es base de $C$ $\Leftrightarrow$ $B$ genera a $C$ $\Leftrightarrow$ $B$ es LI
+  - Es decir, para probar que algo es base de un código de dimensión $k$, podemos ver que
+    - Genera y es LI
+    - Tiene $k$ elementos y genera
+    - Tiene $k$ elementos y es LI
+- **Cantidad de elementos de un código lineal**
+  - Si $k$ es la dimensión de $C$, entonces la cantidad de elementos es de $2^k$
+  - Por ello, la dimensión de un código es el **logaritmo en base 2** del número de palabras
+- **La dimensión nos dice cuántos de los bits del código son de información**
+  - Los restantes $n-k$ son los bits que se tienen que agregar para poder corregir la cantidad de errores que querramos corregir
+
+### Codificación y decodificación
+
+En el caso general de un código lineal, las palabras a codificar serán las palabras de $\left\lbrace 0,1\right\rbrace^k$ (P), donde $k$ es su dimensión pero las palabras del código estarán en $\left\lbrace 0,1\right\rbrace^n$ (C) para algún $n$.
+
+- El transmisor necesita algo que transforme cada palabra de $P$ en una de $C$ para poder mandarla (_codificación_), mientras que el receptor necesita, luego de haber corregido los errores, poder transformar la palabra de $C$ en la de $P$ correspondiente (_decodificación_).
+- Para ello, se usan **transformaciones lineales**
+
+#### Transformaciones a realizar
+
+- Una transformación lineal $T:V_1\rightarrow V_2$ entre espacios vectoriales es una función tal que $u,v\in V_1,c\in K\Rightarrow T(c.u+v)=c.T(u)+T(v)$
+  - $Im(T)=\left\lbrace v\in V_2:\exists u\in V_1:T(u)=v\right\rbrace$
+  - Si $T:V_1\rightarrow V_2$ es lineal, entonces $Im(T)$ es un subespacio vectorial de $V_2$
+- Por ello, entonces, buscamos implementar $T$ de la forma especial
+  - $T:\left\lbrace 0,1\right\rbrace^n:x\rightarrow (x,L(x))$ o
+  - $T:\left\lbrace 0,1\right\rbrace^n:x\rightarrow (L(x),x)$
+
+  de modo que la matriz que se use para la transformación solo guarde la parte correspondiente a $L$
+
+#### Matriz generadora
+
+- G es matriz generadora de $C$ si $C$ es la imagen de la transformación lineal ( $T:\left\lbrace 0,1\right\rbrace^k\rightarrow\left\lbrace 0,1\right\rbrace^n$ dada por $T(u)=u.G$ donde $k=dimC$ )
+  - Es decir, cualquier matriz cuyas filas formen base de $C$ es generadora
+    - Si $G$ es generadora de $C$ que tiene longitud $n$ y dimensión $k$, entonces $G$ debe ser $k\times n$
+    - Dada una matriz $G$ que sea $k\times n$ y cuyas filas sean LI, podemos simplemente definir a $C$ como el espacio generador por las filas de $G$
+- Para que la decodificación sea rápida, se busca que $G$ tenga la _identidad_ a izquierda o derecha
+  - Si la tenemos la identidad de $k\times k$ a izquierda, entonces $u.G = (u,u.A)$ si $G=[I_k|A]$. Y análogo para la derecha.
+
+## Códigos de Corrección de Errores Cíclicos
