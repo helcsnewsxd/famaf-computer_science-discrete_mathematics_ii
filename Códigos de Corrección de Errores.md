@@ -73,15 +73,15 @@ De la teoría de códigos, este es uno de los problemas: "diseñar códigos que 
 
 #### Cota de Hamming (Teorema)
 
-Sea $C$ un código de longitud $n$, $\delta=\delta(C)$ y $t=\left\lfloor\frac{\delta-1}{2}\right\rfloor$, entonces $$len(C)\leq\frac{2^n}{\sum_{i=1}^t \binom{n}{i}}$$
+Sea $C$ un código de longitud $n$, $\delta=\delta(C)$ y $t=\left\lfloor\frac{\delta-1}{2}\right\rfloor$, entonces $$size(C)\leq\frac{2^n}{\sum_{i=1}^t \binom{n}{i}}$$
 
-- Observar que si con ciertos parámetros $n$, $len(C)$, $t$ la cota de Hamming no se satisface, entonces sabemos que no existe un código con esos parámetros. Pero si la cota **sí** se satisface, eso **no implica** que **exista** un código con esos parámetros.
+- Observar que si con ciertos parámetros $n$, $size(C)$, $t$ la cota de Hamming no se satisface, entonces sabemos que no existe un código con esos parámetros. Pero si la cota **sí** se satisface, eso **no implica** que **exista** un código con esos parámetros.
   - La cota de Hamming sirve para probar imposibilidad, no existencia
   - Si queremos probar existencia, vamos a tener que **dar** un código que satisfaga las condiciones que se piden
 
 ##### Código perfecto
 
-- Un código $C$ es _perfecto_ si el $\leq$ de la cota de Hamming es un $=$. Es decir, si $$len(C)=\frac{2^n}{\sum_{i=1}^t \binom{n}{i}}$$
+- Un código $C$ es _perfecto_ si el $\leq$ de la cota de Hamming es un $=$. Es decir, si $$size(C)=\frac{2^n}{\sum_{i=1}^t \binom{n}{i}}$$
 - Se llaman así porque son lo mejor que puede haber, dadas las limitaciones del universo
   - Hay una cantidad infinita (haciendo variar el $n$) pero son extremadamente raros
 
