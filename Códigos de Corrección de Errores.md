@@ -142,4 +142,97 @@ En el caso general de un código lineal, las palabras a codificar serán las pal
 - Para que la decodificación sea rápida, se busca que $G$ tenga la _identidad_ a izquierda o derecha
   - Si la tenemos la identidad de $k\times k$ a izquierda, entonces $u.G = (u,u.A)$ si $G=[I_k|A]$. Y análogo para la derecha.
 
+### Detección y Corrección de errores
+
+- Así como todo espacio vectorial puede pensarse como la imagen de una cierta transformación lineal, también puede pensarse como el **núcleo** de alguna otra transformación lineal
+  - Con esto, detectar errores es trivial: si $C=Nu(L)$, entonces las palabras de $C$ son exactamente aquellas $v$ para las cuales $L(v)=0$.
+
+#### Matriz de Chequeo
+
+- $H$ es una matriz de chequeo (de paridad) de un código $C$ de longitud $n$ si $C=Nu(H)=\left\lbrace x\in\left\lbrace 0,1\right\rbrace^n:H.x^t=0\right\rbrace$
+  - Si bien la definición no lo requiere, consideraremos que las filas de $H$ son LI
+  - Notemos lo siguiente
+    - Dada una matriz $H$, definimos $C=Nu(H)$ y $C$ será lineal
+    - Y viceversa, como todo subespacio vectorial es el núcleo de alguna transformación lineal, y asociada a toda transformación lineal tenemos una matriz, todo código lineal tiene asociada al menos una matriz de chequeo
+- **Dimensiones** (considerando filas como LI)
+  - Cantidad de columnas $\rightarrow n$
+  - Cantidad de filas $\rightarrow r=n-k$
+    - Dado esto, la dimensión de $C$ en términos del número de filas y columnas de la matriz de chequeo es $k=n-r=\text{nro columnas - nro filas}$
+      - Si $H$ tiene la identidad, es contar la cantidad de columnas que no forman parte de esta
+  - Por ello, $H$ es $(n-k)\times n$ si las filas son LI
+- Propiedades y Teoremas
+  - Si $H$ es matriz de chequeo de $C$, entonces $$\delta(C)=Min\left\lbrace j:\exists\text{ un conjunto de j columnas LD de H}\right\rbrace$$
+
+##### **Elección de matriz óptima**
+
+###### Problema
+
+Supongamos que se pide dar una matriz de chequeo lo más chica posible que sirva para codificar $2^k$ palabras con un código lineal que corrija al menos un error
+
+- Buscamos que las filas sean LI
+- Como se necesitan codificar $2^k$ palabras, entonces la matriz será $r\times (r+k)$
+- Queremos corregir al menos un error, así que queremos que la matriz de chequeo tenga todas las columnas distintas y no contenga la columna $0$
+- La condición $r+k\leq 2^r-1$ es una condición necesaria y suficiente para poder tener $r+k$ columnas distintas y no nulas para la matriz de chequeo
+
+###### Código de Hamming (Otro punto de vista del problema)
+
+Este código surge del siguiente problema: "dado un $r$ (cantidad de filas de la matriz de chequeo), ¿hasta cuál $k$ (dimensión del código lineal) podemos llegar?"
+
+- El máximo $k$ es $2^r-1-r$
+- Consisten en tomar una matriz con TODAS las $2^r-1$ columnas no nulas posibles
+  - Es independiente del orden porque, si bien los códigos que surgen son distintos, son equivalentes entre sí al ser permutaciones las palabras entre estos
+- Denotaremos por $H_r$ a cualquier código de Hamming con $r$ filas
+- **Propiedades**
+  - Tiene $r$ filas
+  - Tiene dimensión $k=2^r-1-r$
+  - Tiene $2^{2^r-1-r} palabras$
+  - Tiene $\delta=3$
+    - Por construcción no tiene la columna $0$ ni columnas repetidas, así que $\delta\geq 3$
+    - Pero como tiene todas las columnas, en particular también tiene tres que son LD en algún lugar, así que $\delta\leq 3$
+  - Por lo tanto, _corrije exactamente un error_
+  - Los códigos de Hamming son **perfectos**
+- **Ordenamientos óptimos de las columnas de un código de Hamming**
+  - Son cuatro dependiendo de
+    - Si contamos las columnas desde la izquierda o desde la derecha
+    - Si representamos los números con el bit más representativo arriba o abajo
+  - El orden óptimo es el que tiene como columna $i$-ésima la representación binaria del número $i$
+  - Es óptimo ya que permite un mejor cálculo en el algoritmo de corrección de errores
+    - Si $H.w^t\neq 0$, tomamos $v=w+e_j$ como palabra mandada, donde $j$ es tal que su representación binaria es la columna $H.w^t$
+    - Calcular $H.w^t$ es simplemente hacer suma (xor) de los $j$ correspondientes a los bits $1$ de $w$. Es decir, los números de las posiciones en donde $w$ tiene $1$
+- **Contras**
+  - Si se producen 2 errores, no hay forma de darse cuenta que hubo 2 errores y no 1, pues la suma de dos columnas va a dar otra, siempre. Por ello, dos errores SIEMPRE serán corregidos como si hubiera habido uno solo y, por lo tanto, corregidos mal
+    - Para esto, se usan los **códigos de Hamming extendidos**, los cuales surgen de agregar un bit de paridad al código $C$
+
+#### Corrección de al menos UN error
+
+- Si $H$ es una matriz que _no tiene la columna cero ni tiene columnas repetidas_, entonces $C=NU(H)$ corrige _al menos UN error_. Si, además, alguna columna es suma de otras dos u otras tres columnas, entonces $C$ corrije exactamente un error.
+- **ALGORITMO de corrección de UN error**
+  - Calcular $H.w^t$
+  - Si el resultado es la columna $0$, aceptar $w$ como la palabra mandada
+  - Si el resultado es una columna de $H$, digamos la $j$-ésima, cambiar el bit $j$ de $w$ para recuperar la palabra mandada
+  - Si el resultado **no** es ninguno de los anteriores, hubo más de un error y no se puede corregir de esta forma
+
+### Relación entre Matriz Generadora y Matriz de Chequeo
+
+Si $A$ es una matriz $r\times k$ entonces $[I_r|A]$ es una matriz de chequeo de un código $C$ si y solo si $[A^t|I_k]$ es una matriz generadora de $C$
+
+- Similarmente, [A|I_r] es una matriz de chequeo de un código $C$ si y solo si $[I_k|A^t]$ es una matriz generadora de $C$
+
+### Teorema: Cota de Singleton
+
+Si $C$ es un código lineal de longitud $n$ y dimensión $k$, entonces: $$\delta(C)\leq n-k+1$$
+
+- Códigos en donde se cumple la _igualdad_ se llaman MDS codes (Maximum Distance Separable Codes) y son extremadamente importantes en transmisión y criptografía.
+
+### Códigos para corrección de MÁS DE UN error
+
+#### Códigos de repetición
+
+Sea $C$ un código de longitud $n$, definimos el código de repetición $r$ veces a partir de $C$ que denotaremos como $Rep_r(C)$ de la siguiente forma: $$Rep_r(C)=\left\lbrace v\in\left\lbrace 0,1\right\rbrace^{nr}\right\rbrace :v_1v_2...v_n\in C\wedge$$ $$v_1v_2...v_n=v_{n+1}v_{n+2}...v_{2n}=v_{2n+1}v_{2n+2}...v_{3n}=...=v_{(r-1)n+1}v_{(r-1)n+2}...v_{rn}$$
+
+- Es decir, las palabras de $$Rep_r(C)$$ son de la forma $v...v$ con $v\in C$ donde hay $r$ "$v$"
+  - La _cantidad_ de palabras de $C$ y $Rep_r(C)$ es la misma
+- $\delta(Rep_r(C))=r\delta(C)$
+  - Esto nos permite construir códigos con $\delta$ arbitrariamente grandes pero a un costo grande en cantidad de bits extras
+
 ## Códigos de Corrección de Errores Cíclicos
