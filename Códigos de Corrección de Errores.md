@@ -139,6 +139,7 @@ En el caso general de un código lineal, las palabras a codificar serán las pal
   - Es decir, cualquier matriz cuyas filas formen base de $C$ es generadora
     - Si $G$ es generadora de $C$ que tiene longitud $n$ y dimensión $k$, entonces $G$ debe ser $k\times n$
     - Dada una matriz $G$ que sea $k\times n$ y cuyas filas sean LI, podemos simplemente definir a $C$ como el espacio generador por las filas de $G$
+    - $C$ es el espacio generado por las filas de $G$
 - Para que la decodificación sea rápida, se busca que $G$ tenga la _identidad_ a izquierda o derecha
   - Si la tenemos la identidad de $k\times k$ a izquierda, entonces $u.G = (u,u.A)$ si $G=[I_k|A]$. Y análogo para la derecha.
 
