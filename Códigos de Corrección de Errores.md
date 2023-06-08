@@ -217,7 +217,7 @@ Este código surge del siguiente problema: "dado un $r$ (cantidad de filas de la
 
 Si $A$ es una matriz $r\times k$ entonces $[I_r|A]$ es una matriz de chequeo de un código $C$ si y solo si $[A^t|I_k]$ es una matriz generadora de $C$
 
-- Similarmente, [A|I_r] es una matriz de chequeo de un código $C$ si y solo si $[I_k|A^t]$ es una matriz generadora de $C$
+- Similarmente, $[A|I_r]$ es una matriz de chequeo de un código $C$ si y solo si $[I_k|A^t]$ es una matriz generadora de $C$
 
 ### Teorema: Cota de Singleton
 
@@ -231,7 +231,7 @@ Si $C$ es un código lineal de longitud $n$ y dimensión $k$, entonces: $$\delta
 
 Sea $C$ un código de longitud $n$, definimos el código de repetición $r$ veces a partir de $C$ que denotaremos como $Rep_r(C)$ de la siguiente forma: $$Rep_r(C)=\left\lbrace v\in\left\lbrace 0,1\right\rbrace^{nr}\right\rbrace :v_1v_2...v_n\in C\wedge$$ $$v_1v_2...v_n=v_{n+1}v_{n+2}...v_{2n}=v_{2n+1}v_{2n+2}...v_{3n}=...=v_{(r-1)n+1}v_{(r-1)n+2}...v_{rn}$$
 
-- Es decir, las palabras de $$Rep_r(C)$$ son de la forma $v...v$ con $v\in C$ donde hay $r$ "$v$"
+- Es decir, las palabras de $$Rep_r(C)$$ son de la forma $v...v$ con $v\in C$ donde hay $r$ " $v$ "
   - La _cantidad_ de palabras de $C$ y $Rep_r(C)$ es la misma
 - $\delta(Rep_r(C))=r\delta(C)$
   - Esto nos permite construir códigos con $\delta$ arbitrariamente grandes pero a un costo grande en cantidad de bits extras
