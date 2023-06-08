@@ -274,7 +274,7 @@ Sea $C$ un código de longitud $n$, definimos el código de repetición $r$ vece
 - Si $C$ es lineal, entonces existe **un único** polinomio no nulo en $C$ de grado mínimo
   - Notar que no se pide que sea cíclico y solo vale porque estamos en $\left\lbrace 0,1\right\rbrace$
   - Si $C$ es cíclico, el único polinomio no nulo de menor grado se llama el **polinomio generador** y se lo suele denotar por $g(x)$
-- **Teorema fundamental de códigos cíclicos**: sea $g(x)$ el polinomio generador de un código cíclico $C$ de longitud $n$, entonces
+- **Teorema Fundamental de Códigos Cíclicos**: sea $g(x)$ el polinomio generador de un código cíclico $C$ de longitud $n$, entonces
   - $C$ está formado por los múltiplos de $g(x)$ de grafo menor que $n$: $C=\left\lbrace p(x):gr(p)\lt n\wedge g(x)|p(x)\right\rbrace$
   - $C=\left\lbrace v(x)\odot g(x):v\text{ es un polinomio cualquiera}\right\rbrace$
   - $gr(g(x))=n-k$
@@ -282,3 +282,53 @@ Sea $C$ un código de longitud $n$, definimos el código de repetición $r$ vece
   - $g_0=1$
 - Como consecuencia de lo anterior, como $g(x)|(1+x^n)$, al polinomio $\frac{1+x^n}{g(x)}$ se lo suele llamar _polinomio chequeador_ y se lo denota por $h(x)$
   - Cumple que $p(x)\in C\Rightarrow h(x)\odot p(x)=0$
+
+### Métodos de codificación y decodificación
+
+#### Método 1 (usa la propiedad 1 del Teorema Fundamental)
+
+##### Codificación (1)
+
+Dada una palabra en $\left\lbrace 0,1\right\rbrace^k$, la cual estará identificada con un polinomio $u$ de grado menor a $k$, la palabra asociada en $C$ es $u(x)g(x)$
+
+##### Matriz generadora (1)
+
+Notemos que $\left\lbrace x^ig(x)\right\rbrace_{i=0}^{k-1}$ es una base de $C$. Luego, por esto la matriz generadora es:
+
+![Ciclico - Matriz generadora - 1](img/Ciclico%20-%20Matriz%20generadora%20-%201.png)
+
+##### Decodificación (1)
+
+Como la matriz generadora no tiene la identidad, para decodificar una palabra hay que dividirla por $g(x)$
+
+#### Método 2 (usa la propiedad 2 del Teorema Fundamental)
+
+##### Codificación (2)
+
+Dada una palabra en $\left\lbrace 0,1\right\rbrace^k$, la cual estará identificada con un polinomio $u$ de grado menor a $k$, la palabra asociada en $C$ es $(p(x)\text{ mod }g(x)) + p(x)$ donde $p(x)=u(x)x^{n-k}$
+
+- Aquí se cumple que el polinomio $p(x)$ tiene grado mayor o igual a $n-k$, mientras que el otro, menor
+
+##### Matriz generadora (2)
+
+La matriz generadora es:
+
+![Ciclico - Matriz generadora - 2](img/Ciclico%20-%20Matriz%20generadora%20-%202.png)
+
+##### Matriz de chequeo (2)
+
+- Si vemos la matriz de chequeo, podremos notar que es un código de Hamming. En particular, todos los códigos de Hamming son, en algún orden, cíclicos
+- La matriz de chequeo con Id a izquierda se puede obtener teniendo en cuenta que la columna $j\text{-ésima}$ es $x^j\text{ mod }g(x)$
+
+##### Polinomio chequeador (2)
+
+El polinomio chequeador definido anteriormente ( $h(x)=\frac{1+x^n}{g(x)}$ ) cumple que:
+
+- $p(x)\in C\Rightarrow h(x)\odot p(x)=0$
+- $p:gr(p)\lt n\wedge h(x)\odot p(x)=0\Rightarrow p(x)\in C$
+
+##### Decodificación (2)
+
+Dada la propiedad de _inalteración_ del polinomio de la derecha en la suma de la codificación, mirando los coeficientes de grado mayor o igual a $n-k$, podemos recuperar $u(x)x^{n-k}$ y de ahí recuperar $u(x)$
+
+- Es decir, basta mirar los últimos $k$ bits
