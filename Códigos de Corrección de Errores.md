@@ -236,3 +236,48 @@ Sea $C$ un código de longitud $n$, definimos el código de repetición $r$ vece
   - Esto nos permite construir códigos con $\delta$ arbitrariamente grandes pero a un costo grande en cantidad de bits extras
 
 ## Códigos de Corrección de Errores Cíclicos
+
+### Conceptos a usar y notación
+
+#### Palabras
+
+- Las palabras serán denotadas como $w=w_0w_1...w_{n-1}$
+- Dada una palabra $w=w_0w_1...w_{n-1}$, definimos la rotación de $w$ como la palabra $rot(w)=w_{n-1}w_0...w_{n-2}$
+  - $rot^n(w)=w$
+
+#### Polinomios
+
+- La palabra $w_0w_1...w_{n-1}$ se puede pensar como el polinomio $w_0+w_1x+w_2x^2+...+w_{n-1}x^{n-1}=\sum_{i=0}^{n-1} w_ix^i$
+- Si $p(x)$ y $m(x)$ son polinomios, entonces $p(x)\text{ mod }m(x)$ denotará el resto de la división de $p(x)$ por $m(x)$.
+
+#### Operación de polinomios a usar
+
+- Dadas dos palabras $v$ y $w$ de logitud $n$, idetificadas con los polinomios $v(x)$, $w(x)$, definimos $v\odot w=v(x)w(x)\text{ mod }(1+x^n)$
+  - Se extiende la def a casos donde una de las palabras tenga más de $n$ bits, definiéndola de la misma forma
+  - **Propiedades** (trabajando en $\left\lbrace 0,1\right\rbrace$)
+    - $x^n\text{ mod }(1+x^n)=1$
+    - $rot(w)=x\odot w(x)$
+
+### Definición
+
+- Un código es cíclico si es lineal y la rotación de cualquiera de sus palabras es otra palabra del código
+  - Equivalencias
+    - $C$ es cíclico si $C$ es lineal y se cumple que $w\in C\Rightarrow rot(w)\in C$
+    - $C$ es cíclico si es lineal y existe una base de $C$ tal que $rot(w)\in C$ para toda palabra $w$ de la base
+      - Por ello, para costruirlo solo basta en tomar una palabra $w$ y cosiderar el espacio vectorial generado por $\left\lbrace rot^i(w)\right\rbrace_{i=0}^{n-1}$
+
+### Propiedades
+
+- Sea $C$ un código cíclico, $w\in C$ y $v$ una palabra cualquiera. Entonces $v\odot w\in C$
+  - Por ello, un código cíclico es un _ideal_
+- Si $C$ es lineal, entonces existe **un único** polinomio no nulo en $C$ de grado mínimo
+  - Notar que no se pide que sea cíclico y solo vale porque estamos en $\left\lbrace 0,1\right\rbrace$
+  - Si $C$ es cíclico, el único polinomio no nulo de menor grado se llama el **polinomio generador** y se lo suele denotar por $g(x)$
+- **Teorema fundamental de códigos cíclicos**: sea $g(x)$ el polinomio generador de un código cíclico $C$ de longitud $n$, entonces
+  - $C$ está formado por los múltiplos de $g(x)$ de grafo menor que $n$: $C=\left\lbrace p(x):gr(p)\lt n\wedge g(x)|p(x)\right\rbrace$
+  - $C=\left\lbrace v(x)\odot g(x):v\text{ es un polinomio cualquiera}\right\rbrace$
+  - $gr(g(x))=n-k$
+  - $g(x)|(1+x^n)$
+  - $g_0=1$
+- Como consecuencia de lo anterior, como $g(x)|(1+x^n)$, al polinomio $\frac{1+x^n}{g(x)}$ se lo suele llamar _polinomio chequeador_ y se lo denota por $h(x)$
+  - Cumple que $p(x)\in C\Rightarrow h(x)\odot p(x)=0$
