@@ -341,6 +341,6 @@ Supongamos que se manda $v$ y llega $w$ con a lo sumo $t$ errores. Sean:
 $$s_i=x^iw\text{ mod }g\forall i=0,...,n-1$$
 donde $s_0$ se denomina síndrome.
 
-Luego, por **Teorema** tenemos que, sea $e=$x^{n-i}s_i\text{ mod }(1+x^n)$$. Si $|e|\leq$, entonces $v=w+e$.
+Luego, por **Teorema** tenemos que, sea $e=x^{n-i}s_i\text{ mod }(1+x^n)$. Si $|e|\leq$, entonces $v=w+e$.
 
 - Se toma el $i$ más chico que cumple esto
