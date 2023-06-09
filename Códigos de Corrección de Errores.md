@@ -332,3 +332,15 @@ El polinomio chequeador definido anteriormente ( $h(x)=\frac{1+x^n}{g(x)}$ ) cum
 Dada la propiedad de _inalteración_ del polinomio de la derecha en la suma de la codificación, mirando los coeficientes de grado mayor o igual a $n-k$, podemos recuperar $u(x)x^{n-k}$ y de ahí recuperar $u(x)$
 
 - Es decir, basta mirar los últimos $k$ bits
+
+### Error Trapping
+
+Este método no siempre funciona, pero es útil cuando se producen errores en ráfaga (varios errores todos juntos). Es decir, es favorable cuando los errores están juntos y es problemático cuando están muy dispersos dentro de la palabra.
+
+Supongamos que se manda $v$ y llega $w$ con a lo sumo $t$ errores. Sean:
+$$s_i=x^iw\text{ mod }g\forall i=0,...,n-1$$
+donde $s_0$ se denomina síndrome.
+
+Luego, por **Teorema** tenemos que, sea $e=$x^{n-i}s_i\text{ mod }(1+x^n)$$. Si $|e|\leq$, entonces $v=w+e$.
+
+- Se toma el $i$ más chico que cumple esto
