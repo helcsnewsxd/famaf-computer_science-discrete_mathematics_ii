@@ -29,7 +29,7 @@ EK tiene complejidad $O(nm^2)$
     - **(1)** $d_k(y)=d_k(x)+1\wedge d_{k+r}(x)=d_{k+r}(y)+1$ (por L2)
     - Tenemos
 
-      <img src="https://latex.codecogs.com/svg.image?&space;\begin{aligned}&space;d_r(t)&space;=&space;&\&space;d_r(x)&plus;b_r(x)\text{&space;por&space;D2}\\&space;=&space;&\&space;d_r(y)&plus;1&plus;b_r(x)\text{&space;por&space;lo&space;visto&space;antes}\\&space;\geq&space;&\&space;d_k(y)&plus;1&plus;b_k(x)\text{&space;por&space;L1}\\&space;=&space;&\&space;d_k(x)&plus;1&plus;1&plus;b_k(x)\text{&space;por&space;lo&space;visto&space;antes}\\&space;=&space;&\&space;d_k(t)&plus;2\text{&space;por&space;D2}&space;\end{aligned}">
+      ![Ecuación](https://latex.codecogs.com/svg.image?%20%5Cbegin%7Baligned%7D%20d_r(t)%20=%20&%5C%20d_r(x)&plus;b_r(x)%5Ctext%7B%20por%20D2%7D%5C%5C%20=%20&%5C%20d_r(y)&plus;1&plus;b_r(x)%5Ctext%7B%20por%20lo%20visto%20antes%7D%5C%5C%20%5Cgeq%20&%5C%20d_k(y)&plus;1&plus;b_k(x)%5Ctext%7B%20por%20L1%7D%5C%5C%20=%20&%5C%20d_k(x)&plus;1&plus;1&plus;b_k(x)%5Ctext%7B%20por%20lo%20visto%20antes%7D%5C%5C%20=%20&%5C%20d_k(t)&plus;2%5Ctext%7B%20por%20D2%7D%20%5Cend%7Baligned%7D)
 - _Demostración_
   - La complejidad global de EK es $O(cntIteraciones)\times O(BFS)$
     - **(1)** $O(cntIteraciones)=O(nm)$
