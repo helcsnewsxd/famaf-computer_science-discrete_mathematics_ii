@@ -17,7 +17,7 @@ EK tiene complejidad $O(nm^2)$
   - **D3**: un lado $\overrightarrow{xy}$ es $k$-inusable si no forma parte de ningún camino aumentante en el paso $k$
     - Está saturado si es forward
     - Está vacío si es backward
-  - **D4**: un lado $\overrightarrow{xy}$ es $k$-crítico si es $k$-usado y $k+1$-inusable
+  - **D4**: un lado $\overrightarrow{xy}$ es $k$-crítico si es $k$-usado y $(k+1)$-inusable
   - **D5**: $d_k(x)=Min\lbrace p:p\text{ es la longitud de un }f_k\text{-camino aumentante entre }s,x\rbrace$
     - Análogamente se define $b_k(x)$ como la distancia entre $x,t$
 - _Lemas_
