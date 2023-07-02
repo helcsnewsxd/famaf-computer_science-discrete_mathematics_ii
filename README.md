@@ -35,3 +35,5 @@ Tienen el formato de INPUT de los ejercicios para facilitar la verificación
 ## [Códigos de Corrección de Errores](C%C3%B3digos%20de%20Correcci%C3%B3n%20de%20Errores.md)
 
 - No hice algoritmos de esto
+
+## [Lista de demostraciones para el Final](Demostraciones.md)
