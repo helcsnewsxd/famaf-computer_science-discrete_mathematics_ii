@@ -27,13 +27,9 @@ EK tiene complejidad $O(nm^2)$
     - Ya que, por EK, es parte de un camino aumentante construido con BFS, de la forma $s..xy..t$
   - **L3**: si $\overrightarrow{xy}$ es $k$-crítico y $k+r$-usado, entonces $d_{k+r}(t)\geq d_k(t)+2$ $(r\gt 0)$
     - **(1)** $d_k(y)=d_k(x)+1\wedge d_{k+r}(x)=d_{k+r}(y)+1$ (por L2)
-    - Tenemos $$\begin{aligned}
-      d_{r+k}(t) = &\ d_{r+k}(x)+b_{r+k}(x)\text{ por D5}\\
-      = &\ d_{r+k}(y)+1+b_{r+k}(x)\text{ por L3(1)}\\
-      \geq &\ d_k(y)+1+b_k(x)\text{ por L1}\\
-      = &\ d_k(x)+1+1+b_k(x)\text{ por L3(1)}\\
-      = &\ d_k(t)+2\text{ por D5}
-      \end{aligned}$$
+    - Tenemos
+
+      <img src="https://latex.codecogs.com/svg.image?&space;\begin{aligned}&space;d_r(t)&space;=&space;&\&space;d_r(x)&plus;b_r(x)\text{&space;por&space;D2}\\&space;=&space;&\&space;d_r(y)&plus;1&plus;b_r(x)\text{&space;por&space;lo&space;visto&space;antes}\\&space;\geq&space;&\&space;d_k(y)&plus;1&plus;b_k(x)\text{&space;por&space;L1}\\&space;=&space;&\&space;d_k(x)&plus;1&plus;1&plus;b_k(x)\text{&space;por&space;lo&space;visto&space;antes}\\&space;=&space;&\&space;d_k(t)&plus;2\text{&space;por&space;D2}&space;\end{aligned}">
 - _Demostración_
   - La complejidad global de EK es $O(cntIteraciones)\times O(BFS)$
     - **(1)** $O(cntIteraciones)=O(nm)$
