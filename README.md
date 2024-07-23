@@ -13,7 +13,7 @@ Durante el desarrollo de la cursada he implementado los algoritmos que se han vi
 | Algoritmo | Descripción | Código |
 | --------- | ----------- | ------ |
 | Coloreo greedy | Dado un orden | [CPP](./Algoritmos/Coloreo/Greedy.cpp) |
-| Coloreo greedy general | Brute $n!$ (da $\chi(G)$) | [CPP](./Algoritmos/Coloreo/GreedyBrute.cpp) |
+| Coloreo greedy general | Brute $n!$ (da $\chi(G)$ ) | [CPP](./Algoritmos/Coloreo/GreedyBrute.cpp) |
 | Flujo greedy | | [CPP](./Algoritmos/Flujo/Greedy.cpp) |
 | Flujo Ford-Fulkerson | | [CPP](./Algoritmos/Flujo/FF.cpp) |
 | Flujo Edmonds-Karp | | [CPP](./Algoritmos/Flujo/EK.cpp) |
