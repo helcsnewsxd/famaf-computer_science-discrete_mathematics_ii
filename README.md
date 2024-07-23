@@ -39,8 +39,7 @@ La lista de demostraciones que nos tomaron en el final se puede encontrar [aquí
 | Demostración | Resolución |
 | ------------ | ---------- |
 | Complejidad de Edmonds-Karp | [PDF](./Teórico/Demostraciones%20para%20el%20Final/Complejidad%20de%20Edmonds-Karp.pdf) |
-| Las distancias de EK no disminuyen en
-pasos sucesivos | [PDF](./Teórico/Demostraciones%20para%20el%20Final/Las%20distancias%20de%20EK%20no%20disminuyen%20en%20pasos%20sucesivos.pdf) |
+| Las distancias de EK no disminuyen en pasos sucesivos | [PDF](./Teórico/Demostraciones%20para%20el%20Final/Las%20distancias%20de%20EK%20no%20disminuyen%20en%20pasos%20sucesivos.pdf) |
 | Complejidad de Dinic | [PDF](./Teórico/Demostraciones%20para%20el%20Final/Complejidad%20de%20Dinic.pdf) |
 | Teorema MFMC | [PDF](./Teórico/Demostraciones%20para%20el%20Final/Teorema%20MFMC.pdf) |
 | 2-COLOR es polinomial | [PDF](./Teórico/Demostraciones%20para%20el%20Final/2-COLOR%20es%20polinomial.pdf) |
