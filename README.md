@@ -26,11 +26,11 @@ Durante el desarrollo de la cursada he implementado los algoritmos que se han vi
 
 | Tema | Resumen |
 | ---- | ------- |
-| Generalidades de grafos | [MD](./Generalidades%20de%20grafos.md) |
-| Coloreo | [MD](./Coloreo.md) |
-| Flujo | [MD](./Flujo.md) |
-| Matchings | [MD](./Matchings.md) |
-| Códigos de Corrección de Errores | [MD](./C%C3%B3digos%20de%20Correcci%C3%B3n%20de%20Errores.md) |
+| Generalidades de grafos | [MD](./Teórico/Resúmenes/Generalidades%20de%20grafos.md) |
+| Coloreo | [MD](./Teórico/Resúmenes/Coloreo.md) |
+| Flujo | [MD](./Teórico/Resúmenes/Flujo.md) |
+| Matchings | [MD](./Teórico/Resúmenes/Matchings.md) |
+| Códigos de Corrección de Errores | [MD](./Teórico/Resúmenes/C%C3%B3digos%20de%20Correcci%C3%B3n%20de%20Errores.md) |
 
 ## Demostraciones para el Final
 
